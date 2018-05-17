@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<form action="get" id='a'>
+		<script type="text/javascript">
+			var i,flag,n=0;
+			var d = document.getElementById("a");
+			document.getElementById("k")
+			function div(){
+				var div = document.createElement('div');
+				div.id="d"+document.getElementById("t0").value;
+				a.appendChild(div);
+			}
+			function addToList(){
+				var opt = document.createElement('option');
+				opt.text=opt.value=document.getElementById("t0").value;
+				document.getElementById("l1").options.add(opt);
+			}
+			function addRBox(){
+				var box = document.createElement('input');
+				box.type="text";
+				box.placeholder="rate out of 10";
+				box.id="t"+document.getElementById("t0").value;
+				var temp = document.getElementById(box.id);
+				var p = document.getElementById("d"+document.getElementById("t0").value);
+				box.onkeyup=function(){
+					var v = document.getElementById(this.id).value;
+					if((v>10)||(v<1)||isNaN(v)){
+						document.getElementById(this.id).value="";
+						document.getElementById(this.id).style.backgroundColor="white";
+					}
+					else if(v>5){
+						document.getElementById(this.id).style.backgroundColor="green";
+					}
+					else{
+						document.getElementById(this.id).style.backgroundColor="red";
+					}
+				};
+				p.appendChild(box);
+			}
+			function addCBox(){
+                var box2 = document.createElement('input');
+				box2.type="text";
+				var p = document.getElementById("d"+document.getElementById("t0").value);
+				p.appendChild(box2);
+			}
+			function checkRepeat(){
+				flag=0;
+				for(i=0;i<document.getElementById("l1").options.length;i++){
+				    document.getElementById("l1").selectedIndex=i;					
+					if(document.getElementById("t0").value==document.getElementById("l1").value){
+						flag=1;
+					}
+				}
+				if(flag==0){
+					div();
+					add();
+				}
+			}
+			function add(){
+				addToList();
+				var p = document.getElementById("d"+document.getElementById("t0").value);
+	            p.appendChild(document.createTextNode(document.getElementById("t0").value+": "));
+				p.appendChild(document.createElement('br'));
+            	p.appendChild(document.createTextNode("rating:"));
+            	addRBox();
+				p.appendChild(document.createElement('br'));	
+	            p.appendChild(document.createTextNode("comments:"));
+				addCBox();
+				p.appendChild(document.createElement('br'));	
+				p.appendChild(document.createElement('hr'));
+			}
+			function remove(){
+				var p = document.getElementById("d"+document.getElementById("l1").value);
+				p.remove();
+				document.getElementById("l1").remove(document.getElementById("l1").selectedIndex);
+			}
+			
+		</script>
+		<pre>
+			<input type="text" name="t0" id="t0" >
+
+			<input type="button" name="b1" value="add mentee" onclick='checkRepeat()'>
+			
+			<select name="l1" id="l1" header="mentees">
+			</select>
+
+			<input type="button" name="reset" value="delete mentee" onclick="remove()" >
+		</pre>
+	</form>
+</body>
+</html>
